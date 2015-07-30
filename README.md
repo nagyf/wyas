@@ -1,2 +1,6 @@
-# wyas
-Write Yourself A Scheme tutorial implementation
+# WλaS
+
+[Write λourself A Scheme tutorial](https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours) implementation
+
+## About
+This project is my first project written in Haskell, based on the famous Write Yourself a Scehem tutorial, but I will add new features to it.
