@@ -23,4 +23,3 @@ showVal (DottedList head tail) = "(" ++ unwordsList head ++ " . " ++ showVal tai
 
 unwordsList :: [LispVal] -> String
 unwordsList = unwords . map showVal
-
