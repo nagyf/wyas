@@ -1,4 +1,7 @@
-module Types where
+module Types(
+    LispVal(..),
+    unwordsList
+    ) where
 
 import Control.Monad.Error
 

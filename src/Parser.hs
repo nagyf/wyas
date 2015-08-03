@@ -1,4 +1,4 @@
-module Parser where
+module Parser(readExpr) where
 
 import Text.ParserCombinators.Parsec hiding (spaces)
 import Control.Monad
@@ -59,8 +59,6 @@ parseExpr = parseAtom
                     char ')'
                     return x
 
-
-
 parseList :: Parser LispVal
 parseList = liftM List $ sepBy parseExpr spaces
 
@@ -76,6 +74,8 @@ parseQuoted = do
     x <- parseExpr
     return $ List [Atom "quote", x]
 
+-- |Reads an expression from the 'String' parameter, and either returns an error
+-- message, or returns the parsed Lisp expression.
 readExpr :: String -> E.ThrowsError LispVal
 readExpr input = case parse parseExpr "lisp" input of
     Left err -> throwError $ E.Parser err

@@ -1,4 +1,4 @@
-module REPL where
+module REPL(runRepl, evalAndPrint) where
 
 import System.IO
 import Control.Monad
@@ -25,6 +25,7 @@ until_ pred prompt action = do
       then return ()
       else action result >> until_ pred prompt action
 
+-- |Run the REPL
 runRepl :: IO ()
 runRepl = until_ (== "quit") (readPrompt "Lisp>>> ") evalAndPrint
 

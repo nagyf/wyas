@@ -1,5 +1,5 @@
 {-# LANGUAGE ExistentialQuantification #-}
-module Evaluator where
+module Evaluator (eval) where
 
 import Control.Monad.Error
 import Types

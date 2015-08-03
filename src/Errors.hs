@@ -1,4 +1,9 @@
-module Errors where
+module Errors (
+  LispError(..),
+  ThrowsError(..),
+  trapError,
+  extractValue
+  ) where
 
 import Text.ParserCombinators.Parsec (ParseError)
 import Control.Monad.Error
