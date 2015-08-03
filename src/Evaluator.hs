@@ -16,6 +16,7 @@ eval (List [Atom "if", pred, conseq, alt]) = do
         Bool False -> eval alt
         otherwise -> eval conseq
 eval (List (Atom func : args)) = mapM eval args >>= apply func
+eval val = throwError $ Default $ "Unable to evaluate expression: " ++ show val
 
 apply :: String -> [LispVal] -> ThrowsError LispVal
 apply func args = maybe (throwError $ NotFunction "Unrecognized primitive function args " func)
