@@ -1,0 +1,828 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Th",
+				"ThrowsError	(Evaluator.hs)"
+			],
+			[
+				"null",
+				"nullEnv"
+			],
+			[
+				"lift",
+				"liftThrows	(Errors.hs)"
+			],
+			[
+				"ma",
+				"maybe"
+			],
+			[
+				"en",
+				"envRef"
+			],
+			[
+				"read",
+				"readIORef"
+			],
+			[
+				"IO",
+				"IOThrowsError"
+			],
+			[
+				"Lisp",
+				"LispVal"
+			],
+			[
+				"unwords",
+				"unwordsList"
+			],
+			[
+				"ex",
+				"extractValue"
+			],
+			[
+				"sho",
+				"showError"
+			],
+			[
+				"cre",
+				"createdBy"
+			],
+			[
+				"may",
+				"maybeReadString"
+			],
+			[
+				"B",
+				"BReader"
+			],
+			[
+				"b",
+				"bReader"
+			],
+			[
+				"run",
+				"runBReader"
+			],
+			[
+				"BR",
+				"BReader"
+			],
+			[
+				"announce",
+				"announceList"
+			],
+			[
+				"Read",
+				"ReaderT"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"a",
+				"announce"
+			],
+			[
+				"l",
+				"lookup"
+			],
+			[
+				"str",
+				"stringReader"
+			],
+			[
+				"get",
+				"getString"
+			],
+			[
+				"esc",
+				"escape"
+			],
+			[
+				"ch",
+				"character"
+			],
+			[
+				"e",
+				"escapedChars"
+			],
+			[
+				"parse",
+				"parseExpr"
+			],
+			[
+				"par",
+				"parseNumber"
+			],
+			[
+				"pa",
+				"parseNumber"
+			],
+			[
+				"Lis",
+				"LispVal"
+			],
+			[
+				"im",
+				"import"
+			],
+			[
+				"Par",
+				"Parser"
+			],
+			[
+				"re",
+				"remaining"
+			],
+			[
+				"de",
+				"decodeModified"
+			],
+			[
+				"enc",
+				"encodeModified"
+			],
+			[
+				"is",
+				"isPalindrome"
+			],
+			[
+				"my",
+				"myLengthHelper"
+			],
+			[
+				"ele",
+				"elementAt"
+			],
+			[
+				"count",
+				"countNeighbours"
+			],
+			[
+				"cou",
+				"countTrue"
+			],
+			[
+				"cabal",
+				"cabal_sandbox"
+			],
+			[
+				"ne",
+				"neighbours"
+			],
+			[
+				"evolve",
+				"evolveNew"
+			],
+			[
+				"emp",
+				"emptyWorld"
+			],
+			[
+				"empty",
+				"emptyWorld	(GameOfLife.hs)"
+			],
+			[
+				"rende",
+				"renderJValue"
+			],
+			[
+				"render",
+				"renderPair"
+			],
+			[
+				"JN",
+				"JNull"
+			],
+			[
+				"JBO",
+				"JObject"
+			],
+			[
+				"JNu",
+				"JNumber"
+			],
+			[
+				"String",
+				"Strings	(apod.hs)"
+			],
+			[
+				"new",
+				"newtype	Newtype"
+			],
+			[
+				"Knight",
+				"KnightPos"
+			],
+			[
+				"Kni",
+				"KnightPos"
+			],
+			[
+				"insert",
+				"insertAll"
+			],
+			[
+				"api",
+				"api_key"
+			],
+			[
+				"getRe",
+				"getResponseBody"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"phone",
+				"phonecatApp	(controllers.js)"
+			],
+			[
+				"ang",
+				"angular	AngularJS"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/REPL.hs",
+			"settings":
+			{
+				"buffer_size": 1437,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Main.hs",
+			"settings":
+			{
+				"buffer_size": 760,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Types.hs",
+			"settings":
+			{
+				"buffer_size": 3310,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Evaluator.hs",
+			"settings":
+			{
+				"buffer_size": 9996,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Haskell/Haskell.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Haskell/Haskell.sublime-build",
+					""
+				],
+				[
+					"Packages/SublimeREPL/sublimerepl_build_system_hack.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/SublimeREPL/sublimerepl_build_system_hack.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Haskell/Haskell.sublime-build",
+					""
+				],
+				[
+					"Packages/SublimeREPL/sublimerepl_build_system_hack.sublime-build",
+					""
+				],
+				[
+					"Packages/User/golife.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Haskell/Haskell.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/JSHint/JSHint.sublime-build",
+					""
+				],
+				[
+					"Packages/SublimeREPL/sublimerepl_build_system_hack.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/JSHint/JSHint.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/SublimeREPL/sublimerepl_build_system_hack.sublime-build",
+					""
+				],
+				[
+					"Packages/User/golife.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/User/golife.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 56.0,
+		"last_filter": "configure",
+		"selected_items":
+		[
+			[
+				"configure",
+				"SublimeHaskell: Configure"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"sublimeHaskell",
+				"SublimeHaskell: Run"
+			],
+			[
+				"run",
+				"SublimeHaskell: Run"
+			],
+			[
+				"reb",
+				"SublimeHaskell: Rebuild"
+			],
+			[
+				"sublime",
+				"SublimeHaskell: Install"
+			],
+			[
+				"cabal",
+				"Cabal: List"
+			],
+			[
+				"rebuild",
+				"SublimeHaskell: Rebuild"
+			],
+			[
+				"project",
+				"Project: Save As"
+			],
+			[
+				"sand",
+				"SublimeHaskell: Switch Cabal sandbox"
+			],
+			[
+				"sandb",
+				"SublimeHaskell: Switch Cabal sandbox"
+			],
+			[
+				"sublimehaskell",
+				"Preferences: SublimeHaskell Settings – User"
+			],
+			[
+				"sandbox",
+				"SublimeHaskell: Switch Cabal sandbox"
+			],
+			[
+				"haskell",
+				"SublimeHaskell: Build"
+			],
+			[
+				"user",
+				"Preferences: SublimeHaskell Settings – User"
+			],
+			[
+				"styl",
+				"SublimeHaskell: Stylish"
+			],
+			[
+				"stylis",
+				"SublimeHaskell: Stylish"
+			],
+			[
+				"hlint",
+				"SublimeHaskell: Check & Lint"
+			],
+			[
+				"lint",
+				"SublimeHaskell: Lint"
+			],
+			[
+				"stylish",
+				"SublimeHaskell: Stylish"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"package sy",
+				"Package Syncing: Define Sync Folder"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/nagyf/dev/haskell/wyas/src/Errors.hs",
+		"/home/nagyf/dev/haskell/wyas/src/Types.hs",
+		"/home/nagyf/dev/haskell/wyas/src/Evaluator.hs",
+		"/home/nagyf/dev/haskell/wyas/src/Parser.hs",
+		"/home/nagyf/dev/haskell/wyas/src/Main.hs",
+		"/home/nagyf/dev/haskell/wyas/src/REPL.hs",
+		"/home/nagyf/dev/haskell/lambda-torrent/src/Data/Torrent.hs",
+		"/home/nagyf/dev/haskell/lambda-torrent/src/Data/BEncode.hs",
+		"/home/nagyf/dev/haskell/lambda-torrent/lambda-torrent.cabal",
+		"/home/nagyf/dev/haskell/lambda-torrent/src/Main.hs",
+		"/home/nagyf/dev/haskell/scheme/Parser.hs",
+		"/home/nagyf/dev/haskell/scheme/Main.hs",
+		"/home/nagyf/dev/haskell/lambda-torrent/Bencode.hs",
+		"/home/nagyf/dev/haskell/SimpleJSON.hs",
+		"/home/nagyf/dev/haskell/h99.hs",
+		"/home/nagyf/dev/haskell/states.hs",
+		"/home/nagyf/dev/haskell/opengl.hs",
+		"/home/nagyf/dev/haskell/golife/golife.sublime-build",
+		"/home/nagyf/.config/sublime-text-3/Packages/SublimeHaskell/Settings/SublimeHaskell.sublime-settings",
+		"/home/nagyf/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/nagyf/dev/haskell/golife/README.md",
+		"/home/nagyf/dev/haskell/golife/golife.cabal",
+		"/home/nagyf/dev/haskell/golife/LICENSE",
+		"/home/nagyf/.config/sublime-text-3/Packages/User/SublimeHaskell.sublime-settings",
+		"/home/nagyf/dev/haskell/golife/Main.hs",
+		"/home/nagyf/dev/haskell/golife/GameOfLife.hs",
+		"/home/nagyf/dev/haskell/GameOfLife.hs",
+		"/home/nagyf/dev/haskell/splitLines.hs",
+		"/home/nagyf/dev/haskell/hsnasa/apod.hs",
+		"/home/nagyf/dev/haskell/tree.hs",
+		"/home/nagyf/dev/haskell/knigth.hs",
+		"/home/nagyf/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/nagyf/dev/haskell/apod.hs",
+		"/home/nagyf/dev/haskell/topcoder.hs",
+		"/home/nagyf/dev/haskell/hello.hs",
+		"/home/nagyf/.config/sublime-text-3/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/home/nagyf/.config/sublime-text-3/Packages/User/SublimeREPL.sublime-settings",
+		"/home/nagyf/dev/car-calc/app/index.html",
+		"/home/nagyf/dev/car-calc/Gruntfile.js",
+		"/home/nagyf/dev/car-calc/package.json",
+		"/home/nagyf/dev/car-calc/bower.json",
+		"/home/nagyf/dev/angular-phonecat/app/js/app.js",
+		"/home/nagyf/dev/angular-phonecat/app/js/controllers.js",
+		"/home/nagyf/dev/angular-phonecat/app/index.html",
+		"/home/nagyf/dev/angular-phonecat/bower.json",
+		"/home/nagyf/dev/angular-phonecat/app/phones/dell-streak-7.json",
+		"/home/nagyf/.config/sublime-text-3/Packages/HTMLBeautify/HTMLBeautify.sublime-settings",
+		"/home/nagyf/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/nagyf/.config/sublime-text-3/Packages/User/HTMLBeautify.sublime-settings",
+		"/home/nagyf/dev/angular-phonecat/app/css/app.css",
+		"/home/nagyf/dev/angular-phonecat/README.md"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"bs",
+			"bindings",
+			"pred",
+			"tail",
+			"head",
+			"pred",
+			"eval",
+			"getMetaInfo",
+			"fr",
+			"bReader",
+			"x",
+			"Object",
+			"intReader",
+			"stringReader",
+			"runParser",
+			"Parser",
+			"escaped",
+			"escapableChars",
+			"escapeableChars",
+			"escapedChars",
+			"nonEscape",
+			"escape",
+			"BS",
+			"summarize",
+			"guard",
+			"mm",
+			"{",
+			"cs",
+			"nub",
+			"mappend",
+			"f",
+			"import",
+			".",
+			"String",
+			"BS",
+			" ",
+			"main",
+			"watch",
+			"task",
+			"registerTask",
+			"watch",
+			"*/\n",
+			">\n",
+			"Total",
+			">\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/REPL.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1437,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								491,
+								491
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeHaskell/Syntaxes/Haskell-SublimeHaskell.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 249.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Main.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 760,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								684,
+								684
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeHaskell/Syntaxes/Haskell-SublimeHaskell.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/Types.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3310,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								365,
+								365
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeHaskell/Syntaxes/Haskell-SublimeHaskell.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 342.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/Evaluator.hs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9996,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408,
+								408
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SublimeHaskell/Syntaxes/Haskell-SublimeHaskell.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 318.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.haskell_error_checker":
+	{
+		"height": 213.0
+	},
+	"output.haskell_sublime_load":
+	{
+		"height": 124.0
+	},
+	"pinned_build_system": "",
+	"project": "wyas.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 208.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

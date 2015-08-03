@@ -14,7 +14,6 @@ import Text.ParserCombinators.Parsec hiding (spaces)
 import Control.Monad
 import Types
 import Control.Monad.Error
-import qualified Errors as E
 
 -- |Parser for any lisp symbol
 symbol :: Parser Char
@@ -93,7 +92,7 @@ parseExpr = parseAtom
 
 -- |Reads an expression from the 'String' parameter, and either returns an error
 -- message, or returns the parsed Lisp expression as 'LispVal'
-readExpr :: String -> E.ThrowsError LispVal
+readExpr :: String -> ThrowsError LispVal
 readExpr input = case parse parseExpr "lisp" input of
-    Left err -> throwError $ E.Parser err
+    Left err -> throwError $ Parser err
     Right val -> return val

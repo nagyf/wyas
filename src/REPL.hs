@@ -18,7 +18,6 @@ import System.IO
 import Control.Monad
 import Evaluator
 import Parser
-import Errors
 import Types
 
 -- |Print the prompt without a newline character, and flush the buffer
@@ -44,9 +43,9 @@ until_ predicate prompt action = do
       else action result >> until_ predicate prompt action
 
 runOne :: String -> IO ()
-runOne expr = nullEnv >>= flip evalAndPrint expr
+runOne expr = primitiveBindings >>= flip evalAndPrint expr
 
 -- |Run the REPL until the user executes the 'quit'
 runRepl :: IO ()
-runRepl = nullEnv >>= until_ (== "quit") (readPrompt "Lisp>>> ") . evalAndPrint
+runRepl = primitiveBindings >>= until_ (== "quit") (readPrompt "Lisp>>> ") . evalAndPrint
 

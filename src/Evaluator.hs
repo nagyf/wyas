@@ -10,11 +10,10 @@ This module exports the 'eval' function, what can be used to evaluate a lisp
 expression.
 -}
 {-# LANGUAGE ExistentialQuantification #-}
-module Evaluator (eval, nullEnv, bindVars) where
+module Evaluator (eval, nullEnv, bindVars, primitiveBindings) where
 
 import Control.Monad.Error
 import Types
-import Errors
 import Data.IORef
 
 -- |Evaluates a 'LispVal' and returns either a 'LispError' or an evaluated 'LispValue'
@@ -33,14 +32,37 @@ eval env (List [Atom "set!", Atom var, form]) =
      eval env form >>= setVar env var
 eval env (List [Atom "define", Atom var, form]) =
      eval env form >>= defineVar env var
-eval env (List (Atom func : args)) = mapM (eval env) args >>= liftThrows . apply func
+eval env (List (Atom "define" : List (Atom var : params) : b)) =
+     makeNormalFunc env params b >>= defineVar env var
+eval env (List (Atom "define" : DottedList (Atom var : params) varargs : b)) =
+     makeVarArgs varargs env params b >>= defineVar env var
+eval env (List (Atom "lambda" : List params : b)) =
+     makeNormalFunc env params b
+eval env (List (Atom "lambda" : DottedList params varargs : b)) =
+     makeVarArgs varargs env params b
+eval env (List (Atom "lambda" : varargs@(Atom _) : b)) =
+     makeVarArgs varargs env [] b
+eval env (List (function : args)) = do
+     func <- eval env function
+     argVals <- mapM (eval env) args
+     apply func argVals
 eval _ val = throwError $ Default $ "Unable to evaluate expression: " ++ show val
 
 -- |Applies a function to the given arguments
-apply :: String -> [LispVal] -> ThrowsError LispVal
-apply func args = maybe (throwError $ NotFunction "Unrecognized primitive function args " func)
-                        ($ args)
-                        (lookup func primitives)
+apply :: LispVal -> [LispVal] -> IOThrowsError LispVal
+apply (PrimitiveFunc f) args = liftThrows $ f args
+apply (Func ps vs b c) args =
+  if num ps /= num args && vs == Nothing
+    then throwError $ NumArgs (num ps) args
+    else (liftIO $ bindVars c $ zip ps args) >>= bindVarArgs vs >>= evalBody
+
+  where
+    remainingArgs = drop (length ps) args
+    num = toInteger . length
+    evalBody env = liftM last $ mapM (eval env) b
+    bindVarArgs arg env = case arg of
+      Just argName -> liftIO $ bindVars env [(argName, List $ remainingArgs)]
+      Nothing -> return env
 
 primitives :: [(String, [LispVal] -> ThrowsError LispVal)]
 primitives = [("+", numericBinop (+)),
@@ -225,3 +247,17 @@ bindVars envRef bs = readIORef envRef >>= extendEnv bs >>= newIORef
      where extendEnv bss env = liftM (++ env) (mapM addBinding bss)
            addBinding (var, value) = do ref <- newIORef value
                                         return (var, ref)
+
+primitiveBindings :: IO Env
+primitiveBindings = nullEnv >>= (flip bindVars $ map makePrimitiveFunc primitives)
+  where
+    makePrimitiveFunc (var, func) = (var, PrimitiveFunc func)
+
+makeFunc :: (Monad m, Show a) => Maybe String -> Env -> [a] -> [LispVal] -> m LispVal
+makeFunc varargs env params b = return $ Func (map show params) varargs b env
+
+makeNormalFunc :: Env -> [LispVal] -> [LispVal] -> IOThrowsError LispVal
+makeNormalFunc = makeFunc Nothing
+
+makeVarArgs :: LispVal -> Env -> [LispVal] -> [LispVal] -> IOThrowsError LispVal
+makeVarArgs = makeFunc . Just . show
