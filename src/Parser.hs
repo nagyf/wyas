@@ -31,10 +31,6 @@ escaped = do
     x <- oneOf "\\nrvtbf\""
     return [f, x]
 
--- |Escaped a character
-escape :: Char -> String
-escape ch = ['\\', ch]
-
 -- |Parser for any character except for escapable ones
 nonEscaped :: Parser Char
 nonEscaped = noneOf "\\\"\t\n\r\v\b\0"
@@ -73,9 +69,9 @@ parseList = liftM List $ sepBy parseExpr spaces
 -- |Parser for a 'DottedList' value
 parseDottedList :: Parser LispVal
 parseDottedList = do
-    head <- endBy parseExpr spaces
-    tail <- char '.' >> spaces >> parseExpr
-    return $ DottedList head tail
+    h <- endBy parseExpr spaces
+    t <- char '.' >> spaces >> parseExpr
+    return $ DottedList h t
 
 parseQuoted :: Parser LispVal
 parseQuoted = do

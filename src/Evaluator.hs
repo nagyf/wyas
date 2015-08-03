@@ -22,11 +22,11 @@ eval val@(String _) = return val
 eval val@(Number _) = return val
 eval val@(Bool _) = return val
 eval (List [Atom "quote", val]) = return val
-eval (List [Atom "if", pred, conseq, alt]) = do
-    result <- eval pred
+eval (List [Atom "if", predicate, conseq, alt]) = do
+    result <- eval predicate
     case result of
         Bool False -> eval alt
-        otherwise -> eval conseq
+        _ -> eval conseq
 eval (List (Atom func : args)) = mapM eval args >>= apply func
 eval val = throwError $ Default $ "Unable to evaluate expression: " ++ show val
 
@@ -65,8 +65,8 @@ primitives = [("+", numericBinop (+)),
 
 -- |Creates a numerical binary operator based on a haskell function
 numericBinop :: (Integer -> Integer -> Integer) -> [LispVal] -> ThrowsError LispVal
-numericBinop op           []  = throwError $ NumArgs 2 []
-numericBinop op singleVal@[_] = throwError $ NumArgs 2 singleVal
+numericBinop _           []  = throwError $ NumArgs 2 []
+numericBinop _ singleVal@[_] = throwError $ NumArgs 2 singleVal
 numericBinop op params        = mapM unpackNum params >>= return . Number . foldl1 op
 
 -- |Creates a 'Bool' binary operator based on a haskell function
@@ -77,20 +77,25 @@ boolBinop unpacker op args = if length args /= 2
                                         right <- unpacker $ args !! 1
                                         return $ Bool $ left `op` right
 
+numBoolBinop :: (Integer -> Integer -> Bool) -> [LispVal] -> ThrowsError LispVal
 numBoolBinop = boolBinop unpackNum
+
+strBoolBinop :: (String -> String -> Bool) -> [LispVal] -> ThrowsError LispVal
 strBoolBinop  = boolBinop unpackStr
+
+boolBoolBinop :: (Bool -> Bool -> Bool) -> [LispVal] -> ThrowsError LispVal
 boolBoolBinop = boolBinop unpackBool
 
 -- |Returns the first element of a list
 car :: [LispVal] -> ThrowsError LispVal
-car [List (x : xs)]         = return x
-car [DottedList (x : xs) _] = return x
+car [List (x : _)]         = return x
+car [DottedList (x : _) _] = return x
 car [badArg]                = throwError $ TypeMismatch "pair" badArg
 car badArgList              = throwError $ NumArgs 1 badArgList
 
 -- |Returns the rest of a list, i.e. the part of the list that follows the first item
 cdr :: [LispVal] -> ThrowsError LispVal
-cdr [List (x : xs)]         = return $ List xs
+cdr [List (_ : xs)]         = return $ List xs
 cdr [DottedList [_] x]      = return x
 cdr [DottedList (_ : xs) x] = return $ DottedList xs x
 cdr [badArg]                = throwError $ TypeMismatch "pair" badArg
@@ -114,7 +119,7 @@ eqv [(DottedList xs x), (DottedList ys y)] = eqv [List $ xs ++ [x], List $ ys ++
 eqv [(List arg1), (List arg2)]             = return $ Bool $ (length arg1 == length arg2) &&
                                                              (all eqvPair $ zip arg1 arg2)
      where eqvPair (x1, x2) = case eqv [x1, x2] of
-                                Left err -> False
+                                Left _ -> False
                                 Right (Bool val) -> val
 eqv [_, _]                                 = return $ Bool False
 eqv badArgList                             = throwError $ NumArgs 2 badArgList

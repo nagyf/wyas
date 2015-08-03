@@ -11,7 +11,8 @@ module Types(
     unwordsList
     ) where
 
-import Control.Monad.Error
+import Control.Monad.Error()
+import Data.IORef
 
 -- |Represents a Lisp value
 data LispVal = Atom String
@@ -32,8 +33,11 @@ showVal (Number contents) = show contents
 showVal (Bool True) = "#t"
 showVal (Bool False) = "#f"
 showVal (List contents) = "(" ++ unwordsList contents ++ ")"
-showVal (DottedList head tail) = "(" ++ unwordsList head ++ " . " ++ showVal tail ++  ")"
+showVal (DottedList h t) = "(" ++ unwordsList h ++ " . " ++ showVal t ++  ")"
 
 -- |Prints every 'LispVal', and concatenates it to a 'String'
 unwordsList :: [LispVal] -> String
 unwordsList = unwords . map showVal
+
+-- |Represents an Environment which stores the lisp variables
+type Env = IORef [(String, IORef LispVal)]

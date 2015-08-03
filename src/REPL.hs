@@ -35,11 +35,11 @@ evalAndPrint expr = evalString expr >>= putStrLn
 
 -- |Repeats a monadic action, until the given boolean expression evaluates to false
 until_ :: Monad m => (a -> Bool) -> m a -> (a -> m ()) -> m ()
-until_ pred prompt action = do
+until_ predicate prompt action = do
    result <- prompt
-   if pred result
+   if predicate result
       then return ()
-      else action result >> until_ pred prompt action
+      else action result >> until_ predicate prompt action
 
 -- |Run the REPL until the user executes the 'quit'
 runRepl :: IO ()

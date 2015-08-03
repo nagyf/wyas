@@ -8,7 +8,7 @@ Portability : portable
 -}
 module Errors (
   LispError(..),
-  ThrowsError(..),
+  ThrowsError,
   trapError,
   extractValue
   ) where
@@ -48,6 +48,7 @@ showError (TypeMismatch expected found) = "Invalid type: expected " ++ expected
 showError (Parser parseErr)             = "Parse error at " ++ show parseErr
 showError (Default err) = err
 
+trapError :: (Show e, MonadError e m) => m String -> m String
 trapError action = catchError action $ return . show
 
 -- |Extracts the value wrapped in 'Right'

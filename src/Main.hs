@@ -11,10 +11,6 @@ This is the main module of the application, containing the 'main' method.
 module Main where
 
 import System.Environment (getArgs)
-import Parser
-import Evaluator
-import Errors
-import Control.Monad
 import REPL
 
 -- |The main method, used to either evaluate an expression or run the REPL.
@@ -25,4 +21,4 @@ main = do args <- getArgs
           case length args of
                0 -> runRepl
                1 -> evalAndPrint $ args !! 0
-               otherwise -> putStrLn "Program takes only 0 or 1 argument"
+               _ -> putStrLn "Program takes only 0 or 1 argument"
