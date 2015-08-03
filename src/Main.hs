@@ -1,3 +1,13 @@
+{-|
+Module      : Main
+Description : The main module of the application
+License     : MIT
+Maintainer  : jester.nf@gmail.com
+Stability   : stable
+Portability : portable
+
+This is the main module of the application, containing the 'main' method.
+-}
 module Main where
 
 import System.Environment (getArgs)
