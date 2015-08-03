@@ -3,6 +3,8 @@ module Parser where
 import Text.ParserCombinators.Parsec hiding (spaces)
 import Control.Monad
 import Types
+import Control.Monad.Error
+import qualified Errors as E
 
 symbol :: Parser Char
 symbol = oneOf "!#$%&|*+-/:<=>?@^_~"
@@ -74,7 +76,7 @@ parseQuoted = do
     x <- parseExpr
     return $ List [Atom "quote", x]
 
-readExpr :: String -> LispVal
+readExpr :: String -> E.ThrowsError LispVal
 readExpr input = case parse parseExpr "lisp" input of
-    Left err -> String $ "No match " ++ show err
-    Right val -> val
+    Left err -> throwError $ E.Parser err
+    Right val -> return val

@@ -1,5 +1,7 @@
 module Types where
 
+import Control.Monad.Error
+
 data LispVal = Atom String
     | List [LispVal]
     | DottedList [LispVal] LispVal
