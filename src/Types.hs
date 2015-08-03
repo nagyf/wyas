@@ -8,7 +8,8 @@ Portability : portable
 -}
 module Types(
     LispVal(..),
-    unwordsList
+    unwordsList,
+    Env
     ) where
 
 import Control.Monad.Error()

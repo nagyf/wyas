@@ -9,8 +9,11 @@ Portability : portable
 module Errors (
   LispError(..),
   ThrowsError,
+  IOThrowsError,
   trapError,
-  extractValue
+  extractValue,
+  liftThrows,
+  runIOThrows
   ) where
 
 import Text.ParserCombinators.Parsec (ParseError)
@@ -48,9 +51,19 @@ showError (TypeMismatch expected found) = "Invalid type: expected " ++ expected
 showError (Parser parseErr)             = "Parse error at " ++ show parseErr
 showError (Default err) = err
 
+-- |Takes any error value and converts it to it's 'String' representation
 trapError :: (Show e, MonadError e m) => m String -> m String
 trapError action = catchError action $ return . show
 
 -- |Extracts the value wrapped in 'Right'
 extractValue :: ThrowsError a -> a
 extractValue (Right x) = x
+
+type IOThrowsError = ErrorT LispError IO
+
+liftThrows :: ThrowsError a -> IOThrowsError a
+liftThrows (Left err) = throwError err
+liftThrows (Right val) = return val
+
+runIOThrows :: IOThrowsError String -> IO String
+runIOThrows action = runErrorT (trapError action) >>= return . extractValue

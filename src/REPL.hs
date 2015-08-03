@@ -9,13 +9,17 @@ Portability : portable
 A module that implements a very basic REPL (read-eval-print-loop) like the
 haskell REPL.
 -}
-module REPL(runRepl, evalAndPrint) where
+module REPL(
+    runRepl,
+    evalAndPrint,
+    runOne) where
 
 import System.IO
 import Control.Monad
 import Evaluator
 import Parser
 import Errors
+import Types
 
 -- |Print the prompt without a newline character, and flush the buffer
 flushStr :: String -> IO ()
@@ -25,13 +29,11 @@ flushStr str = putStr str >> hFlush stdout
 readPrompt :: String -> IO String
 readPrompt prompt = flushStr prompt >> getLine
 
--- |Reads the expression, and evaluates it as a lisp expression
-evalString :: String -> IO String
-evalString expr = return $ extractValue $ trapError (liftM show $ readExpr expr >>= eval)
+evalAndPrint :: Env -> String -> IO ()
+evalAndPrint env expr =  evalString env expr >>= putStrLn
 
--- |Evaluates the expression using 'evalString', and prints the results
-evalAndPrint :: String -> IO ()
-evalAndPrint expr = evalString expr >>= putStrLn
+evalString :: Env -> String -> IO String
+evalString env expr = runIOThrows $ liftM show $ (liftThrows $ readExpr expr) >>= eval env
 
 -- |Repeats a monadic action, until the given boolean expression evaluates to false
 until_ :: Monad m => (a -> Bool) -> m a -> (a -> m ()) -> m ()
@@ -41,7 +43,10 @@ until_ predicate prompt action = do
       then return ()
       else action result >> until_ predicate prompt action
 
+runOne :: String -> IO ()
+runOne expr = nullEnv >>= flip evalAndPrint expr
+
 -- |Run the REPL until the user executes the 'quit'
 runRepl :: IO ()
-runRepl = until_ (== "quit") (readPrompt "Lisp>>> ") evalAndPrint
+runRepl = nullEnv >>= until_ (== "quit") (readPrompt "Lisp>>> ") . evalAndPrint
 

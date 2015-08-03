@@ -10,25 +10,31 @@ This module exports the 'eval' function, what can be used to evaluate a lisp
 expression.
 -}
 {-# LANGUAGE ExistentialQuantification #-}
-module Evaluator (eval) where
+module Evaluator (eval, nullEnv, bindVars) where
 
 import Control.Monad.Error
 import Types
 import Errors
+import Data.IORef
 
 -- |Evaluates a 'LispVal' and returns either a 'LispError' or an evaluated 'LispValue'
-eval :: LispVal -> ThrowsError LispVal
-eval val@(String _) = return val
-eval val@(Number _) = return val
-eval val@(Bool _) = return val
-eval (List [Atom "quote", val]) = return val
-eval (List [Atom "if", predicate, conseq, alt]) = do
-    result <- eval predicate
+eval :: Env -> LispVal -> IOThrowsError LispVal
+eval _ val@(String _) = return val
+eval _ val@(Number _) = return val
+eval _ val@(Bool _) = return val
+eval env (Atom var) = getVar env var
+eval _ (List [Atom "quote", val]) = return val
+eval env (List [Atom "if", predicate, conseq, alt]) = do
+    result <- eval env predicate
     case result of
-        Bool False -> eval alt
-        _ -> eval conseq
-eval (List (Atom func : args)) = mapM eval args >>= apply func
-eval val = throwError $ Default $ "Unable to evaluate expression: " ++ show val
+        Bool False -> eval env alt
+        _ -> eval env conseq
+eval env (List [Atom "set!", Atom var, form]) =
+     eval env form >>= setVar env var
+eval env (List [Atom "define", Atom var, form]) =
+     eval env form >>= defineVar env var
+eval env (List (Atom func : args)) = mapM (eval env) args >>= liftThrows . apply func
+eval _ val = throwError $ Default $ "Unable to evaluate expression: " ++ show val
 
 -- |Applies a function to the given arguments
 apply :: String -> [LispVal] -> ThrowsError LispVal
@@ -175,3 +181,47 @@ unpackEquals arg1 arg2 (AnyUnpacker unpacker) =
                 unpacked2 <- unpacker arg2
                 return $ unpacked1 == unpacked2
         `catchError` (const $ return False)
+
+-- |Creates an empty 'Env'
+nullEnv :: IO Env
+nullEnv = newIORef []
+
+-- |Returns 'True' if the variable is bound in the 'Env', otherwise return 'False'
+isBound :: Env -> String -> IO Bool
+isBound envRef var = readIORef envRef >>= return . maybe False (const True) . lookup var
+
+-- |Returns the current value of the variable
+getVar :: Env -> String -> IOThrowsError LispVal
+getVar envRef var = do
+    env <- liftIO $ readIORef envRef
+    maybe (throwError $ UnboundVar "Getting an unbound variable" var)
+          (liftIO . readIORef)
+          (lookup var env)
+
+-- |Modifies the value of an already bound variable
+setVar :: Env -> String -> LispVal -> IOThrowsError LispVal
+setVar envRef var value = do
+  env <- liftIO $ readIORef envRef
+  maybe (throwError $ UnboundVar "Setting an unbound variable" var)
+    (liftIO . (flip writeIORef value))
+    (lookup var env)
+  return value
+
+-- |Defines a new variable in the environment
+defineVar :: Env -> String -> LispVal -> IOThrowsError LispVal
+defineVar envRef var value = do
+     alreadyDefined <- liftIO $ isBound envRef var
+     if alreadyDefined
+        then setVar envRef var value >> return value
+        else liftIO $ do
+             valueRef <- newIORef value
+             env <- readIORef envRef
+             writeIORef envRef ((var, valueRef) : env)
+             return value
+
+-- |Bound multiple variables
+bindVars :: Env -> [(String, LispVal)] -> IO Env
+bindVars envRef bs = readIORef envRef >>= extendEnv bs >>= newIORef
+     where extendEnv bss env = liftM (++ env) (mapM addBinding bss)
+           addBinding (var, value) = do ref <- newIORef value
+                                        return (var, ref)
