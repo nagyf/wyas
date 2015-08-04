@@ -18,7 +18,4 @@ import REPL
 -- argument. If you want to run the REPL, you have to call main without any arguments.
 main :: IO ()
 main = do args <- getArgs
-          case length args of
-               0 -> runRepl
-               1 -> runOne $ args !! 0
-               _ -> putStrLn "Program takes only 0 or 1 argument"
+          if null args then runRepl else runOne $ args

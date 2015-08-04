@@ -21,6 +21,7 @@ import Control.Monad.Error()
 import Data.IORef
 import Text.ParserCombinators.Parsec (ParseError)
 import Control.Monad.Error
+import System.IO (Handle)
 
 -- |Represents an error occured during the evaluation of a Lisp expression
 data LispError = NumArgs Integer [LispVal] -- ^ Wrong number of arguments
@@ -84,6 +85,8 @@ data LispVal = Atom String
         body :: [LispVal],
         closue :: Env
       }
+    | IOFunc ([LispVal] -> IOThrowsError LispVal)
+    | Port Handle
 
 instance Show LispVal where
     show = showVal
@@ -102,6 +105,8 @@ showVal (Func ps v _ _) =
   "(lambda (" ++ unwords (map show ps) ++ (case v of
     Nothing -> ""
     Just val -> " . " ++ val) ++ ")"
+showVal (Port _) = "<IO port>"
+showVal (IOFunc _) = "<IO primitive>"
 
 -- |Prints every 'LispVal', and concatenates it to a 'String'
 unwordsList :: [LispVal] -> String
